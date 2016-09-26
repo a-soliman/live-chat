@@ -47,6 +47,34 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 		<script src="js/main.js"></script>
 		<script>
+
+			function addComment() {
+
+				if( $('#user_name').val().length === 0 ) {
+					alert ('Please enter your "user name"')
+					return false
+				}
+				
+				requestData = $('#last_displayed_chat_id, #user_name, #user_comment').serialize()
+				$.ajax ({
+					url : 'http://localhost/chat_ajax/server.php',
+					type : 'GET',
+					data : requestData ,
+					dataType : 'json' ,
+					success : function( response, status , http) {
+						$.each( response, function( index, item) {
+							$('#chat_box').val($('#chat_box').val() + item.user_name + ' : ' + item.user_comment + '\n')
+							$('#last_displayed_chat_id').val( item.chat_id )
+						})
+						$('#user_comment').val('')
+					},
+					error : function( http, status, error) {
+						alert('Some error occured : ' + error)
+					}
+				})
+			}
+
+
 			function updateChat() {
 				$.ajax ({
 					url : 'http://localhost/chat_ajax/server.php',
@@ -65,8 +93,8 @@
 				})
 			}
 
-			updateChat()
-			// setInterval( updateChat , 4000 )
+			// updateChat()
+			setInterval( updateChat , 4000 )
 		</script>
 
 	</body>
