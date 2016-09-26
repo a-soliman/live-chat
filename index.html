@@ -13,27 +13,27 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="wrapper">
-							<p class="header">Chatroom</p>
-							<div class="content">
+							<form id="chat-form">
+								<header>Chatroom</header>
 								<div class="user">
 									<label for="user_name">User Name:</label>
 									<input type="text" id="user_name" name="user_name" class="form-control" value="">
 								</div>
 								<div class="chatID">
 									<label for="chat_id">Last Displayed chat ID</label>
-									<input type="text" id="last_desplayed_chat_id" name="last_desplayed_chat_id" class="form-control" value="0">
+									<input type="text" id="last_desplayed_chat_id" name="last_desplayed_chat_id" class="form-control" value="0" readonly>
 								</div> <!--chat_id-->
-								<div class="chat">
-									<label for="chat">Chat</label>
-									<textarea name="chat" id="chat" cols="30" rows="10" class="form-control"></textarea>
+								<div class="chat_box">
+									<label for="chat_box">Chat</label>
+									<textarea name="chat_box" id="chat_box" cols="30" rows="10" class="form-control"></textarea>
 								</div> <!--chat-->
 								<div class="message">
-									<label for="message">Add Comment:</label>
-									<input type="text" id="message" name="message" class="form-control">
+									<label for="user_comment">Message:</label>
+									<input type="text" id="user_comment" name="user_comment" class="form-control">
 									<br />
-									<button class="btn btn-primary">Send</button>
-								</div> <!--comment-->
-							</div> <!--content-->
+									<button class="btn btn-primary"  type="submit" value="sendMessage">Send</button>
+								</div> <!--message-->
+							</form>
 						</div>
 					</div>
 				</div>
