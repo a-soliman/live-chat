@@ -21,7 +21,7 @@
 								</div>
 								<div class="chatID">
 									<label for="chat_id">Last Displayed chat ID</label>
-									<input type="text" id="last_desplayed_chat_id" name="last_desplayed_chat_id" class="form-control" value="0" readonly>
+									<input type="text" id="last_displayed_chat_id" name="last_displayed_chat_id" class="form-control" value="0">
 								</div> <!--chat_id-->
 								<div class="chat_box">
 									<label for="chat_box">Chat</label>
@@ -31,7 +31,7 @@
 									<label for="user_comment">Message:</label>
 									<input type="text" id="user_comment" name="user_comment" class="form-control">
 									<br />
-									<button class="btn btn-primary"  type="submit" value="sendMessage">Send</button>
+									<button class="btn btn-primary"  type="submit">Send</button>
 								</div> <!--message-->
 							</form>
 						</div>
@@ -47,7 +47,26 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 		<script src="js/main.js"></script>
 		<script>
-			
+			function updateChat() {
+				$.ajax ({
+					url : 'http://localhost/chat_ajax/server.php',
+					type : 'GET',
+					data : 'last_displayed_chat_id=' + $('#last_displayed_chat_id').val() ,
+					dataType : 'json' ,
+					success : function( response, status , http) {
+						$.each( response, function( index, item) {
+							$('#chat_box').val($('#chat_box').val() + item.user_name + ' : ' + item.user_comment + '\n')
+							$('#last_displayed_chat_id').val( item.chat_id )
+						})
+					},
+					error : function( http, status, error) {
+						alert('Some error occured : ' + error)
+					}
+				})
+			}
+
+			updateChat()
+			// setInterval( updateChat , 4000 )
 		</script>
 
 	</body>
